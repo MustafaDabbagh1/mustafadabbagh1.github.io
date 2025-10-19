@@ -35,6 +35,9 @@
       --glass:rgba(255,255,255,.06);
       --shadow: 0 10px 30px rgba(0,0,0,.35);
       --radius: 18px;
+
+      /* NEW: nav height variable used to keep hero from being overlapped on mobile */
+      --nav-height: 76px; /* desktop-ish default */
     }
     html[data-theme="light"]{
       --bg:#f5f7ff;
@@ -126,7 +129,10 @@
 
     /* --- Hero --- */
     header.hero{
-      padding-top:140px;padding-bottom:90px;position:relative;overflow:visible;
+      /* NEW: pad by nav height + safe-area so content never sits under the fixed nav */
+      padding-top: calc(var(--nav-height) + env(safe-area-inset-top, 0px) + 110px);
+      padding-bottom:90px;
+      position:relative;overflow:visible;
       isolation:isolate;
     }
     #constellation{position:absolute;inset:0;z-index:-1}
@@ -261,6 +267,7 @@
 
     /* --- Responsive --- */
     @media (max-width: 980px){
+      :root{ --nav-height: 82px; }
       .hero-grid{grid-template-columns:1fr}
       .skills-grid{grid-template-columns:1fr}
       .contact{grid-template-columns:1fr}
@@ -275,21 +282,23 @@
       .services-nav{top:-46px}
     }
     @media (max-width: 768px){
+      :root{ --nav-height: 90px; }
       .headline{ font-size:36px; line-height:1.2; }
       .hero-description { font-size:16px; }
       .section{padding:72px 0}
       .section h2{font-size:36px}
-      .hero{padding-top:120px;padding-bottom:60px}
+      .hero{padding-bottom:60px}
       .hero-text-container{ max-width: 100%; padding-inline:12px; }
       .services-slider .slide{ flex-basis: 80%; }
       .impact{grid-template-columns:1fr 1fr}
     }
     @media (max-width: 480px){
+      :root{ --nav-height: 98px; } /* slightly taller nav on small iPhones */
       .headline{ font-size:32px; line-height:1.25; }
       .hero-description { font-size:15px; line-height:1.5; }
       .section{padding:56px 0}
       .section h2{font-size:30px}
-      .hero{padding-top:110px;padding-bottom:50px}
+      .hero{padding-bottom:50px}
       .container{padding:0 16px}
       .hero-grid{gap:24px}
       .services-slider .slide{ flex-basis: 88%; }
@@ -313,7 +322,6 @@
       <a href="#skills">Skills</a>
       <a href="#contact">Contact</a>
       <a class="chip" href="https://www.linkedin.com/in/markabbagh/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
-      <!-- Added Resume chip in nav -->
       <a class="chip" href="https://ppdtechnology.com/images/Resume.pdf" target="_blank" rel="noopener" aria-label="Open résumé PDF">
         <i class="fa-regular fa-file-lines"></i> Résumé
       </a>
@@ -354,7 +362,6 @@
         <div style="display:flex;gap:12px;flex-wrap:wrap;margin:22px 0">
           <a class="btn btn-primary" href="#contact"><i class="fa-solid fa-message"></i> Work with me</a>
           <a class="btn btn-ghost" href="#work"><i class="fa-solid fa-rocket"></i> See projects</a>
-          <!-- Added Résumé button in hero -->
           <a class="btn btn-ghost" href="https://ppdtechnology.com/images/Resume.pdf" target="_blank" rel="noopener" aria-label="View résumé PDF">
             <i class="fa-regular fa-file-lines"></i> View Résumé (PDF)
           </a>
@@ -475,110 +482,108 @@
   <section id="work" class="section">
     <div class="container">
       <h2>Recent Work <span class="muted" style="font-size:18px">(Projects & Courses)</span></h2>
-    <div class="work-grid">
-      <!-- Project A (resized to match others: removed 'large') -->
-      <article class="work-card tilt">
-        <div class="work-media">
-          <img src="https://ppdtechnology.com/images/Screenshot%202025-10-18%20at%202.53.03%E2%80%AFPM.png" alt="PPD Technology website and analytics results">
-        </div>
-        <div class="work-body">
-          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
-            <a class="pill" href="https://ppdtechnology.com/" target="_blank" rel="noopener">
-              <i class="fa-solid fa-link"></i> ppdtechnology.com
-            </a>
-            <span class="pill"><i class="fa-solid fa-chart-line"></i> Traffic ↑</span>
-            <span class="pill"><i class="fa-solid fa-user-check"></i> Retention ↑</span>
-            <span class="pill" aria-label="Forms increased by 4000 percent"><i class="fa-solid fa-file-circle-check"></i> Forms +4000%</span>
+      <div class="work-grid">
+        <!-- Project A (same size as others) -->
+        <article class="work-card tilt">
+          <div class="work-media">
+            <img src="https://ppdtechnology.com/images/Screenshot%202025-10-18%20at%202.53.03%E2%80%AFPM.png" alt="PPD Technology website and analytics results">
           </div>
-          <h3>Project A — PPD Technology Website Redesign & Analytics</h3>
-          <p class="muted">
-            Designed and built a high-performance marketing site for
-            <a href="https://ppdtechnology.com/" target="_blank" rel="noopener" style="color:var(--ink);text-decoration:underline">PPD Technology</a>.
-            Post-launch results: significant traffic growth, higher site retention, and a <strong>4000% increase</strong> in form applications.
-          </p>
-
-          <!-- ==== Quantified Impact row ==== -->
-          <div class="impact" role="list" aria-label="Quantified impact metrics">
-            <div class="impact-item" role="listitem" aria-label="Bounce rate decreased by 18 percent">
-              <div class="val">-18%</div>
-              <p>Bounce rate</p>
+          <div class="work-body">
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
+              <a class="pill" href="https://ppdtechnology.com/" target="_blank" rel="noopener">
+                <i class="fa-solid fa-link"></i> ppdtechnology.com
+              </a>
+              <span class="pill"><i class="fa-solid fa-chart-line"></i> Traffic ↑</span>
+              <span class="pill"><i class="fa-solid fa-user-check"></i> Retention ↑</span>
+              <span class="pill" aria-label="Forms increased by 4000 percent"><i class="fa-solid fa-file-circle-check"></i> Forms +4000%</span>
             </div>
-            <div class="impact-item" role="listitem" aria-label="Primary CTA click-through rate increased by 22 percent">
-              <div class="val">+22%</div>
-              <p>Primary CTA CTR</p>
+            <h3>Project A — PPD Technology Website Redesign & Analytics</h3>
+            <p class="muted">
+              Designed and built a high-performance marketing site for
+              <a href="https://ppdtechnology.com/" target="_blank" rel="noopener" style="color:var(--ink);text-decoration:underline">PPD Technology</a>.
+              Post-launch results: significant traffic growth, higher site retention, and a <strong>4000% increase</strong> in form applications.
+            </p>
+
+            <div class="impact" role="list" aria-label="Quantified impact metrics">
+              <div class="impact-item" role="listitem" aria-label="Bounce rate decreased by 18 percent">
+                <div class="val">-18%</div>
+                <p>Bounce rate</p>
+              </div>
+              <div class="impact-item" role="listitem" aria-label="Primary CTA click-through rate increased by 22 percent">
+                <div class="val">+22%</</div>
+                <p>Primary CTA CTR</p>
+              </div>
+              <div class="impact-item" role="listitem" aria-label="ETL time reduced by 35 percent">
+                <div class="val">-35%</div>
+                <p>ETL time (build → refresh)</p>
+              </div>
             </div>
-            <div class="impact-item" role="listitem" aria-label="ETL time reduced by 35 percent">
-              <div class="val">-35%</div>
-              <p>ETL time (build → refresh)</p>
+          </div>
+        </article>
+
+        <!-- NEW Project: E-commerce A/B Test -->
+        <article class="work-card tilt">
+          <div class="work-media">
+            <img src="https://ppdtechnology.com/images/a-b-testing.jpg" alt="E-commerce A/B Test dashboard preview">
+          </div>
+          <div class="work-body">
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
+              <span class="pill"><i class="fa-solid fa-flask"></i> A/B Testing</span>
+              <span class="pill"><i class="fa-solid fa-database"></i> SQL</span>
+              <span class="pill"><i class="fa-brands fa-python"></i> pandas + statsmodels</span>
+            </div>
+            <h3>E-commerce A/B Test — New Checkout</h3>
+            <p class="muted">
+              Designed and ran a checkout experiment on synthetic-but-realistic data. The test variant showed a
+              <strong>−18.23% absolute conversion drop</strong> vs control (z=2.37, p=0.0089). Recommendation:
+              pause rollout and investigate device/OS splits, traffic mix, and implementation bugs; re-run with tighter instrumentation.
+            </p>
+
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
+              <a class="btn btn-primary" href="https://github.com/MustafaDabbagh1/ecommerce-ab-test" target="_blank" rel="noopener">
+                <i class="fa-brands fa-github"></i> View Code
+              </a>
+              <a class="btn btn-ghost" href="https://nbviewer.org/github/MustafaDabbagh1/ecommerce-ab-test/blob/main/analysis.ipynb" target="_blank" rel="noopener">
+                <i class="fa-solid fa-book-open"></i> Open Notebook
+              </a>
             </div>
           </div>
-          <!-- ===================================== -->
-        </div>
-      </article>
+        </article>
 
-      <!-- NEW Project: E-commerce A/B Test -->
-      <article class="work-card tilt">
-        <div class="work-media">
-          <img src="https://ppdtechnology.com/images/a-b-testing.jpg" alt="E-commerce A/B Test dashboard preview">
-        </div>
-        <div class="work-body">
-          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
-            <span class="pill"><i class="fa-solid fa-flask"></i> A/B Testing</span>
-            <span class="pill"><i class="fa-solid fa-database"></i> SQL</span>
-            <span class="pill"><i class="fa-brands fa-python"></i> pandas + statsmodels</span>
+        <!-- Project B -->
+        <article class="work-card tilt">
+          <div class="work-media">
+            <img src="https://ppdtechnology.com/images/advanced%20data%20analytics.png" alt="Google Advanced Data Analytics certificate visual">
           </div>
-          <h3>E-commerce A/B Test — New Checkout</h3>
-          <p class="muted">
-            Designed and ran a checkout experiment on synthetic-but-realistic data. The test variant showed a
-            <strong>−18.23% absolute conversion drop</strong> vs control (z=2.37, p=0.0089). Recommendation:
-            pause rollout and investigate device/OS splits, traffic mix, and implementation bugs; re-run with tighter instrumentation.
-          </p>
+          <div class="work-body">
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
+              <a class="pill" href="https://www.coursera.org/account/accomplishments/specialization/certificate/62ZEPASDDEN6" target="_blank" rel="noopener"><i class="fa-solid fa-certificate"></i> Certificate</a>
+              <a class="pill" href="https://drive.google.com/drive/folders/1Je8iJqjJ9e3utQnR4ta-O8_EJQjT-Mas" target="_blank" rel="noopener"><i class="fa-solid fa-folder-open"></i> Capstone</a>
+              <a class="pill" href="https://www.coursera.org/professional-certificates/google-advanced-data-analytics" target="_blank" rel="noopener"><i class="fa-solid fa-circle-info"></i> Program Info</a>
+            </div>
+            <h3>Project B — Google Advanced Data Analytics (Completed)</h3>
+            <p class="muted">
+              Completed the Advanced Data Analytics specialization covering statistics, predictive modeling, experimental design, and stakeholder communication.
+            </p>
+          </div>
+        </article>
 
-          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
-            <a class="btn btn-primary" href="https://github.com/MustafaDabbagh1/ecommerce-ab-test" target="_blank" rel="noopener">
-              <i class="fa-brands fa-github"></i> View Code
-            </a>
-            <a class="btn btn-ghost" href="https://nbviewer.org/github/MustafaDabbagh1/ecommerce-ab-test/blob/main/analysis.ipynb" target="_blank" rel="noopener">
-              <i class="fa-solid fa-book-open"></i> Open Notebook
-            </a>
+        <!-- Project C -->
+        <article class="work-card tilt">
+          <div class="work-media">
+            <img src="https://ppdtechnology.com/images/Data%20analytics%20coursera.png" alt="Google Data Analytics certificate visual">
           </div>
-        </div>
-      </article>
-
-      <!-- Project B -->
-      <article class="work-card tilt">
-        <div class="work-media">
-          <img src="https://ppdtechnology.com/images/advanced%20data%20analytics.png" alt="Google Advanced Data Analytics certificate visual">
-        </div>
-        <div class="work-body">
-          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
-            <a class="pill" href="https://www.coursera.org/account/accomplishments/specialization/certificate/62ZEPASDDEN6" target="_blank" rel="noopener"><i class="fa-solid fa-certificate"></i> Certificate</a>
-            <a class="pill" href="https://drive.google.com/drive/folders/1Je8iJqjJ9e3utQnR4ta-O8_EJQjT-Mas" target="_blank" rel="noopener"><i class="fa-solid fa-folder-open"></i> Capstone</a>
-            <a class="pill" href="https://www.coursera.org/professional-certificates/google-advanced-data-analytics" target="_blank" rel="noopener"><i class="fa-solid fa-circle-info"></i> Program Info</a>
+          <div class="work-body">
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
+              <a class="pill" href="https://www.coursera.org/account/accomplishments/specialization/certificate/FLAF74DIXQZ9" target="_blank" rel="noopener"><i class="fa-solid fa-certificate"></i> Certificate</a>
+              <a class="pill" href="https://www.youtube.com/watch?v=rYMw9HIns1E" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i> Capstone Video</a>
+              <a class="pill" href="https://www.coursera.org/professional-certificates/google-data-analytics" target="_blank" rel="noopener"><i class="fa-solid fa-circle-info"></i> Program Info</a>
+            </div>
+            <h3>Project C — Google Data Analytics (Completed)</h3>
+            <p class="muted">Completed the end-to-end Google Data Analytics specialization (ask → prepare → process → analyze → share).</p>
           </div>
-          <h3>Project B — Google Advanced Data Analytics (Completed)</h3>
-          <p class="muted">
-            Completed the Advanced Data Analytics specialization covering statistics, predictive modeling, experimental design, and stakeholder communication.
-          </p>
-        </div>
-      </article>
-
-      <!-- Project C -->
-      <article class="work-card tilt">
-        <div class="work-media">
-          <img src="https://ppdtechnology.com/images/Data%20analytics%20coursera.png" alt="Google Data Analytics certificate visual">
-        </div>
-        <div class="work-body">
-          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
-            <a class="pill" href="https://www.coursera.org/account/accomplishments/specialization/certificate/FLAF74DIXQZ9" target="_blank" rel="noopener"><i class="fa-solid fa-certificate"></i> Certificate</a>
-            <a class="pill" href="https://www.youtube.com/watch?v=rYMw9HIns1E" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i> Capstone Video</a>
-            <a class="pill" href="https://www.coursera.org/professional-certificates/google-data-analytics" target="_blank" rel="noopener"><i class="fa-solid fa-circle-info"></i> Program Info</a>
-          </div>
-          <h3>Project C — Google Data Analytics (Completed)</h3>
-          <p class="muted">Completed the end-to-end Google Data Analytics specialization (ask → prepare → process → analyze → share).</p>
-        </div>
-      </article>
-    </div>
+        </article>
+      </div>
     </div>
   </section>
 
@@ -660,7 +665,6 @@
       <div style="display:flex;gap:10px;align-items:center">
         <a class="chip" href="#top" title="Back to top"><i class="fa-solid fa-circle-up"></i> Top</a>
         <a class="chip" href="https://www.linkedin.com/in/markabbagh/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
-        <!-- Added Resume chip in footer -->
         <a class="chip" href="https://ppdtechnology.com/images/Resume.pdf" target="_blank" rel="noopener" aria-label="Open résumé PDF from footer">
           <i class="fa-regular fa-file-lines"></i> Résumé
         </a>
@@ -971,6 +975,11 @@
       function handleMotionPreference(){ if(mqReduce.matches){ stop(); canvas.style.display='none'; } else { canvas.style.display='block'; start(); } }
       mqReduce.addEventListener?.('change', handleMotionPreference);
       handleMotionPreference();
+    })();
+  </script>
+</body>
+</html>
+
     })();
   </script>
 </body>
