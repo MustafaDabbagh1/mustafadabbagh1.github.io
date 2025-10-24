@@ -74,6 +74,110 @@
         linear-gradient(180deg, var(--bg) 0%, var(--bg) 100%);
     }
 
+    /* --- Enhanced Background Lines --- */
+    .background-lines {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -9998;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    
+    .line {
+      position: absolute;
+      background: linear-gradient(90deg, transparent, rgba(123, 247, 226, 0.3), transparent);
+      height: 1px;
+      width: 200px;
+      animation: lineMove 12s linear infinite;
+    }
+    
+    .line:nth-child(odd) {
+      background: linear-gradient(90deg, transparent, rgba(91, 140, 255, 0.3), transparent);
+    }
+    
+    .line:nth-child(3n) {
+      background: linear-gradient(90deg, transparent, rgba(255, 123, 216, 0.2), transparent);
+      height: 2px;
+      width: 300px;
+    }
+    
+    .line:nth-child(5n) {
+      background: linear-gradient(90deg, transparent, rgba(123, 247, 226, 0.4), transparent);
+      height: 1.5px;
+      width: 250px;
+    }
+    
+    @keyframes lineMove {
+      0% {
+        transform: translateX(-100vw) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.7;
+      }
+      90% {
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateX(100vw) rotate(360deg);
+        opacity: 0;
+      }
+    }
+    
+    @keyframes lineMoveVertical {
+      0% {
+        transform: translateY(-100vh) rotate(90deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.7;
+      }
+      90% {
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(100vh) rotate(90deg);
+        opacity: 0;
+      }
+    }
+    
+    @keyframes lineMoveDiagonal {
+      0% {
+        transform: translateX(-100vw) translateY(-100vh) rotate(45deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.7;
+      }
+      90% {
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateX(100vw) translateY(100vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+    
+    @keyframes lineMoveReverseDiagonal {
+      0% {
+        transform: translateX(100vw) translateY(-100vh) rotate(-45deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.7;
+      }
+      90% {
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateX(-100vw) translateY(100vh) rotate(-45deg);
+        opacity: 0;
+      }
+    }
+
     /* --- Global UI --- */
     .container{max-width:1200px;margin:0 auto;padding:0 22px}
     .chip{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;background:linear-gradient(135deg, var(--glass), transparent);border:1px solid rgba(255,255,255,.08);border-radius:999px;backdrop-filter:blur(8px)}
@@ -307,6 +411,9 @@
   </style>
 </head>
 <body id="top">
+  <!-- Enhanced Background Lines -->
+  <div class="background-lines" id="backgroundLines"></div>
+
   <!-- Top Scroll Progress Bar -->
   <div class="progress" id="progress"></div>
 
@@ -692,6 +799,33 @@
   </div>
 
   <script>
+    // ===== Enhanced Background Lines =====
+    (function() {
+      const backgroundLines = document.getElementById('backgroundLines');
+      const lineCount = 40; // Increased number of lines for more visual activity
+      
+      for (let i = 0; i < lineCount; i++) {
+        const line = document.createElement('div');
+        line.className = 'line';
+        
+        // Randomize animation duration and delay for more dynamic effect
+        const duration = 8 + Math.random() * 10; // 8-18 seconds
+        const delay = Math.random() * 20; // 0-20 seconds delay
+        const animationType = Math.floor(Math.random() * 4);
+        
+        let animationName = 'lineMove';
+        if (animationType === 1) animationName = 'lineMoveVertical';
+        if (animationType === 2) animationName = 'lineMoveDiagonal';
+        if (animationType === 3) animationName = 'lineMoveReverseDiagonal';
+        
+        line.style.animation = `${animationName} ${duration}s linear ${delay}s infinite`;
+        line.style.top = `${Math.random() * 100}%`;
+        line.style.left = `${Math.random() * 100}%`;
+        
+        backgroundLines.appendChild(line);
+      }
+    })();
+
     // ===== Scroll progress bar =====
     const progress = document.getElementById('progress');
     addEventListener('scroll', () => {
@@ -975,10 +1109,6 @@
       function handleMotionPreference(){ if(mqReduce.matches){ stop(); canvas.style.display='none'; } else { canvas.style.display='block'; start(); } }
       mqReduce.addEventListener?.('change', handleMotionPreference);
       handleMotionPreference();
-    })();
-  </script>
-</body>
-</html>
     })();
   </script>
 </body>
