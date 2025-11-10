@@ -266,7 +266,6 @@
     /* --- Work --- */
     .work-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
     .work-card{grid-column:span 6;background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);overflow:hidden;position:relative}
-    .work-card.large{grid-column:span 12}
     .work-media{aspect-ratio:16/9;overflow:hidden}
     .work-media img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
     .work-card:hover .work-media img{transform:scale(1.05)}
@@ -569,6 +568,18 @@
               <span class="chip">GSAP</span><span class="chip">Web Vitals</span><span class="chip">Accessibility</span><span class="chip">SEO</span>
             </div>
           </article>
+
+          <!-- 6: Mobile App Development -->
+          <article class="slide card tilt" tabindex="0">
+            <div class="glow"></div>
+            <i class="fa-solid fa-mobile-screen" aria-hidden="true"></i>
+            <h3>Mobile App Development</h3>
+            <p>Design → Flutter build → TestFlight/Play with analytics, crash monitoring, and privacy-by-design.</p>
+            <div class="chip-row">
+              <span class="chip">Flutter</span><span class="chip">Dart</span><span class="chip">iOS & Android</span>
+              <span class="chip">Firebase</span><span class="chip">UX Writing</span><span class="chip">CI/CD</span>
+            </div>
+          </article>
         </div>
       </div>
     </div>
@@ -579,7 +590,31 @@
     <div class="container">
       <h2>Recent Work <span class="muted" style="font-size:18px">(Projects & Courses)</span></h2>
       <div class="work-grid">
-        <!-- Project A (same size as others) -->
+
+        <!-- Dawra — same size as other cards -->
+        <article class="work-card tilt">
+          <div class="work-media">
+            <img src="https://ppdtechnology.com/images/Mustafa%20photos/Screenshot%202025-11-09%20at%206.59.22%E2%80%AFPM.png" alt="Dawra app main screen">
+          </div>
+          <div class="work-body">
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
+              <span class="pill"><i class="fa-solid fa-mobile-screen-button"></i> Flutter • Dart</span>
+              <span class="pill"><i class="fa-solid fa-book-quran"></i> Fiqh + Insights</span>
+              <span class="pill"><i class="fa-solid fa-shield-heart"></i> Privacy-first</span>
+            </div>
+            <h3>Dawra — Women’s Islamic Health App</h3>
+            <p class="muted">
+              A clean, privacy-first tracker centered on Islamic guidance. Users log mood & symptoms; Dawra maps entries to authentic
+              Qur’ān/ḥadīth reminders in <em>Insights</em>, and the <em>Fiqh</em> tab teaches rulings and ghusl/wuḍūʾ flows with clear visuals.
+            </p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
+              <a class="btn btn-primary" href="#dawra"><i class="fa-solid fa-book-open"></i> Case Study</a>
+              <a class="btn btn-ghost" href="https://ppdtechnology.com/images/Mustafa%20photos/app%20main%20screen.png" target="_blank" rel="noopener"><i class="fa-solid fa-image"></i> App Icon Preview</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project A -->
         <article class="work-card tilt">
           <div class="work-media">
             <img src="https://ppdtechnology.com/images/Screenshot%202025-10-18%20at%202.53.03%E2%80%AFPM.png" alt="PPD Technology website and analytics results">
@@ -617,7 +652,7 @@
           </div>
         </article>
 
-        <!-- NEW Project: E-commerce A/B Test -->
+        <!-- E-commerce A/B Test -->
         <article class="work-card tilt">
           <div class="work-media">
             <img src="https://ppdtechnology.com/images/a-b-testing.jpg" alt="E-commerce A/B Test dashboard preview">
@@ -679,6 +714,58 @@
             <p class="muted">Completed the end-to-end Google Data Analytics specialization (ask → prepare → process → analyze → share).</p>
           </div>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Dawra Case Study ================= -->
+  <section id="dawra" class="section">
+    <div class="container">
+      <h2>Dawra — Mobile App Case Study</h2>
+      <p class="lead">A Flutter app for women’s health with Islamic guidance: Today logging, Daily Insights (Qur’ān & Sunnah), and a Fiqh learning hub.</p>
+
+      <div class="grid-2" style="align-items:start">
+        <div class="panel">
+          <h3 style="margin-top:0">What I built</h3>
+          <ul class="muted" style="line-height:1.75">
+            <li>🎨 <strong>Product & UX</strong> — feminine brand, icon (crescent + drop), dark UI, accessible contrast, microcopy.</li>
+            <li>🧭 <strong>Feature design</strong> — calendar, Today logging (moods/symptoms), Daily Insights mapped to authentic texts, Fiqh tab with ghusl/wuḍūʾ flows.</li>
+            <li>🧱 <strong>Architecture</strong> — Flutter + Dart, clean widgets, state with lightweight providers, modular services.</li>
+            <li>🧪 <strong>Quality</strong> — error handling, input validation, and previewable components for fast iteration.</li>
+            <li>🔒 <strong>Privacy-first</strong> — local-only prototype data with a plan for opt-in sync and anonymized analytics.</li>
+          </ul>
+
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
+            <span class="pill"><i class="fa-brands fa-flutter"></i> Flutter</span>
+            <span class="pill"><i class="fa-solid fa-code"></i> Dart</span>
+            <span class="pill"><i class="fa-solid fa-mobile-screen-button"></i> iOS / Android</span>
+            <span class="pill"><i class="fa-solid fa-shield-heart"></i> Privacy by design</span>
+            <span class="pill"><i class="fa-solid fa-bolt"></i> Smooth animations</span>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3 style="margin-top:0">How it works</h3>
+          <ol class="muted" style="line-height:1.75; padding-left:18px">
+            <li>User logs mood/symptoms → app stores a typed entry for the day.</li>
+            <li>Rule engine maps entries to authenticated Qur’ān/ḥadīth snippets shown in <em>Insights</em>.</li>
+            <li><em>Fiqh</em> tab teaches rulings on menstruation, istiḥāḍah, nifās, and post-menopause with simple flows & diagrams.</li>
+            <li>Design supports future analytics (streaks, trendlines, anonymized aggregate insight).</li>
+          </ol>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <a class="btn btn-primary" href="#contact"><i class="fa-solid fa-message"></i> Collaborate on Dawra</a>
+            <a class="btn btn-ghost" href="#work"><i class="fa-solid fa-rocket"></i> See all projects</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery" style="margin-top:16px">
+        <img src="https://ppdtechnology.com/images/Mustafa%20photos/app%20main%20screen.png" alt="Dawra main screen">
+        <img src="https://ppdtechnology.com/images/Mustafa%20photos/app%20icon%20on%20iphone.png" alt="Dawra app icon on iPhone">
+        <img src="https://ppdtechnology.com/images/Mustafa%20photos/app%20main%20screen.png" alt="Dawra main screen duplicate for layout">
+        <img src="https://ppdtechnology.com/images/Mustafa%20photos/app%20icon%20on%20iphone.png" alt="Dawra icon duplicate for layout">
+        <img src="https://ppdtechnology.com/images/Mustafa%20photos/app%20main%20screen.png" alt="Dawra main screen duplicate for layout">
+        <img src="https://ppdtechnology.com/images/Mustafa%20photos/app%20icon%20on%20iphone.png" alt="Dawra icon duplicate for layout">
       </div>
     </div>
   </section>
@@ -900,7 +987,7 @@
     // ===== Typed.js for roles =====
     document.addEventListener('DOMContentLoaded', () => {
       new Typed('.typed', {
-        strings: ['Data Analyst', 'Data Scientist', 'Machine Learning Engineer'],
+        strings: ['Data Analyst', 'Data Scientist', 'Machine Learning Engineer', 'Mobile App Developer'],
         typeSpeed: 48,
         backSpeed: 24,
         backDelay: 1000,
@@ -931,10 +1018,10 @@
           new Chart(ctx, {
             type: 'radar',
             data: {
-              labels: ['SQL','Python','EDA','Modeling','Visualization','MLOps','Experimentation'],
+              labels: ['SQL','Python','EDA','Modeling','Visualization','MLOps','Experimentation','Flutter'],
               datasets: [{
                 label: 'Proficiency',
-                data: [92, 90, 88, 84, 86, 80, 85],
+                data: [92, 90, 88, 84, 86, 80, 85, 78],
                 fill: true,
                 backgroundColor: 'rgba(123,247,226,0.18)',
                 borderColor: 'rgba(123,247,226,1)',
